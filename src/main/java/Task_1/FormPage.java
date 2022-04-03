@@ -1,5 +1,6 @@
 package Task_1;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -25,6 +26,9 @@ public class FormPage extends BasePage{
     @FindBy(name = "submitAddress")
     private WebElement saveButton;
 
+    protected FormPage(WebDriver driver) {
+        super(driver);
+    }
 
 
     public AddressesPage saveAddress(String alias, String address, String city, String zipcode, String country, String phone) {
@@ -34,8 +38,8 @@ public class FormPage extends BasePage{
         zipcodeInputBox.sendKeys(zipcode);
         countryInputBox.sendKeys(country);
         phoneInputBox.sendKeys(phone);
-        saveButton.click();
-        return new AddressesPage();
+        saveButton.submit();
+        return new AddressesPage(driver);
 
     }
 }
