@@ -7,6 +7,7 @@ Feature: Add new address
     And click addresses tile
     And click +create new address
     And fill out and save form with correct values: <Alias> <Address> <City> <Zip Code> <Country> <Phone>
+    Then Address is saved
 
     Examples:
       | site                                  | login            | password                   | Alias  | Address       | City  | Zip Code | Country | Phone       |

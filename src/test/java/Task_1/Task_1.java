@@ -2,6 +2,7 @@ package Task_1;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -42,13 +43,24 @@ public class Task_1 {
         formPage = addressesPage.createNewAddress();
     }
 
-    @And("^fill out and save form with correct values: (.*) (.*) (.*) (.*) (.*) (.*)$")
+    @And("^fill out and save form with correct values: (.*) (.*\\s.*) (.*) (.*) (.*) (.*)$")
     public void fillOutForm(String alias, String address, String city, String zipcode, String country, String phone) {
         addressesPage = formPage.saveAddress(alias, address, city, zipcode, country, phone);
     }
 
-//    @Then("data is saved in address book")
-//    public void verifyAddress() {
-//
-//    }
+    @Then("Address is saved")
+    public void addressIsSaved() {
+        int index = addressesPage.lastAddressIndex();
+        String actualAddressText = addressesPage.getAddressText(index);
+        String expectedAddressText = "Łukasz Czekan\n" +
+                "Sesame Street\n" +
+                "Bytom\n" +
+                "49-100\n" +
+                "United Kingdom\n" +
+                "500-501-666";
+        String actualAliasText = addressesPage.getAliasText(index);
+        String expectedAliasText = "Kermit";
+        addressesPage.verifyAddress(expectedAddressText, actualAddressText);
+        addressesPage.verifyAlias(expectedAliasText, actualAliasText);
+    }
 }
