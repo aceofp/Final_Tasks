@@ -10,5 +10,5 @@ Feature: Add new address
     Then Address is saved
 
     Examples:
-      | site                                  | login            | password                   | Alias  | Address       | City  | Zip Code | Country | Phone       |
-      | https://mystore-testlab.coderslab.pl/ | aceofp@gmail.com | haslo_fest_oryginalne_1111 | Kermit | Sesame Street | Bytom | 49-100   | Poland  | 500-501-666 |
+      | site                                  | login            | password                   | Alias  | Address       | City  | Zip Code | Country        | Phone       |
+      | https://mystore-testlab.coderslab.pl/ | aceofp@gmail.com | haslo_fest_oryginalne_1111 | Kermit | Sesame Street | Bytom | 49-100   | United Kingdom | 500-501-666 |

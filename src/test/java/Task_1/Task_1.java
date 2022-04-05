@@ -43,7 +43,7 @@ public class Task_1 {
         formPage = addressesPage.createNewAddress();
     }
 
-    @And("^fill out and save form with correct values: (.*) (.*\\s.*) (.*) (.*) (.*) (.*)$")
+    @And("^fill out and save form with correct values: (.*) (.*\\s.*) (.*) (.*) (.*\\s.*) (.*)$")
     public void fillOutForm(String alias, String address, String city, String zipcode, String country, String phone) {
         addressesPage = formPage.saveAddress(alias, address, city, zipcode, country, phone);
     }
