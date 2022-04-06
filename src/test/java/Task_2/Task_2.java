@@ -5,12 +5,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
-
-import java.time.Duration;
 
 public class Task_2 {
 
@@ -20,8 +19,8 @@ public class Task_2 {
     public void userOpenABrowserOnSite() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
         driver.get("https://mystore-testlab.coderslab.pl/");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
 
     }
 
@@ -44,14 +43,14 @@ public class Task_2 {
     public void userPickHummingbird() {
         WebElement clothesLink = driver.findElement(By.xpath("//a[contains(text(),'Clothes')]"));
         clothesLink.click();
-        WebElement sweaterLink = driver.findElement(By.xpath("//a[contains(text(),'Hummingbird printed sweater')]"));
-        sweaterLink.click();
+        WebElement tshirtLink = driver.findElement(By.xpath("//a[contains(text(),'Hummingbird printed t-shirt')]"));
+        tshirtLink.click();
 
 
     }
 
-    @And("User pick M size")
-    public void userPickMSize() {
+    @And("User pick size")
+    public void userPickSize() {
         WebElement dropDownMenu = driver.findElement(By.id("group_1"));
         Select select = new Select(dropDownMenu);
         select.selectByValue("2");
@@ -60,33 +59,69 @@ public class Task_2 {
 
     @And("User pick five pieces")
     public void userPickFivePieces() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,350)", "");
+        WebElement quantityBox = driver.findElement(By.cssSelector("#quantity_wanted"));
+        quantityBox.clear();
+        quantityBox.clear();
+        quantityBox.clear();
+        quantityBox.clear();
+        quantityBox.clear();
+        quantityBox.clear();
+        quantityBox.clear();
+        quantityBox.clear();
+        quantityBox.sendKeys("5");
     }
 
     @And("User add product to the basket")
     public void userAddProductToTheBasket() {
+        WebElement basketButton = driver.findElement(By.xpath("//body/main[1]/section[1]/div[1]/div[1]/section[1]/div[1]/div[2]/div[2]/div[2]/form[1]/div[2]/div[1]/div[2]/button[1]"));
+        basketButton.click();
+        driver.navigate().refresh();
     }
 
     @And("User go to checkout option")
     public void userGoToCheckoutOption() {
+        WebElement cartButton = driver.findElement(By.xpath("//span[contains(text(),'Cart')]"));
+        cartButton.click();
+        WebElement checkoutButton = driver.findElement(By.xpath("//a[contains(text(),'Proceed to checkout')]"));
+        checkoutButton.click();
+
     }
 
     @And("User confirm address")
     public void userConfirmAddress() {
+        WebElement continueButton = driver.findElement(By.xpath("//button[contains(text(),'Continue')]"));
+        continueButton.click();
     }
 
     @And("User pick a pickup method PrestaShop pick up in store")
-    public void userPickAPickupMethodPrestaShopPickUpInStore() {
+    public void userPickPickupMethod() {
+        WebElement confirmButton = driver.findElement(By.name("confirmDeliveryOption"));
+        confirmButton.click();
+
     }
 
     @And("User pick a payment method - Pay by Check")
     public void userPickAPaymentMethodPayByCheck() {
+        WebElement paycheckIcon = driver.findElement(By.cssSelector("#payment-option-1"));
+        paycheckIcon.click();
     }
 
     @And("User click on order with an obligation to pay")
     public void userClickOnOrderWithAnObligationToPay() {
+        WebElement termsBox = driver.findElement(By.id("conditions_to_approve[terms-and-conditions]"));
+        termsBox.click();
+        WebElement obligationButton = driver.findElement(By.xpath("//button[contains(text(),'Order with an obligation to pay')]"));
+        obligationButton.click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,170)", "");
     }
 
-    @Then("User take a screenshot with ammount and order confirmation")
-    public void userTakeAScreenshotWithAmmountAndOrderConfirmation() {
+    @Then("User take a screenshot with amount and order confirmation")
+    public void userTakeAScreenshotWithAmountAndOrderConfirmation() {
     }
+
 }
+
+
