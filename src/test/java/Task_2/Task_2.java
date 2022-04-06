@@ -4,12 +4,12 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+
+import java.io.File;
 
 public class Task_2 {
 
@@ -75,7 +75,7 @@ public class Task_2 {
 
     @And("User add product to the basket")
     public void userAddProductToTheBasket() {
-        WebElement basketButton = driver.findElement(By.xpath("//body/main[1]/section[1]/div[1]/div[1]/section[1]/div[1]/div[2]/div[2]/div[2]/form[1]/div[2]/div[1]/div[2]/button[1]"));
+        WebElement basketButton = driver.findElement(By.cssSelector("button[data-button-action=\"add-to-cart\"]"));
         basketButton.click();
         driver.navigate().refresh();
     }
@@ -119,9 +119,22 @@ public class Task_2 {
     }
 
     @Then("User take a screenshot with amount and order confirmation")
-    public void userTakeAScreenshotWithAmountAndOrderConfirmation() {
+    public void userTakeAScreenshotWithAmountAndOrderConfirmation() throws Exception {
+        takeScreenshot(driver, "src/test/resources/screenshots/testResult.png");
     }
 
+    public static void takeScreenshot(WebDriver webdriver, String fileWithPath) throws Exception {
+        //Convert web driver object to TakeScreenshot
+        TakesScreenshot scrShot = ((TakesScreenshot) webdriver);
+        //Call getScreenshotAs method to create image file
+        File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
+        //Move image file to new destination
+        File DestFile = new File(fileWithPath);
+        //Copy file at destination
+        FileUtils.copyFile(SrcFile, DestFile);
+    }
 }
+
+
 
 
