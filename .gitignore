@@ -28,3 +28,5 @@ hs_err_pid*
 target/
 # ignore out file
 out
+# ignore screenshots
+src/test/resources/screenshots
