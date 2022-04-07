@@ -8,6 +8,7 @@ Feature: Add new address
     And click +create new address
     And fill out and save form with correct values: <Alias> <Address> <City> <Zip Code> <Country> <Phone>
     Then Address is saved
+    And Browser is closed
 
     Examples:
       | site                                  | login            | password                   | Alias  | Address       | City  | Zip Code | Country        | Phone       |

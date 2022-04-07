@@ -39,7 +39,7 @@ public class Task_2 {
 
     }
 
-    @And("User pick Hummingbird Printed Sweater to buy")
+    @And("User pick Hummingbird Printed T-shirt to buy")
     public void userPickHummingbird() {
         WebElement clothesLink = driver.findElement(By.xpath("//a[contains(text(),'Clothes')]"));
         clothesLink.click();
@@ -132,6 +132,11 @@ public class Task_2 {
         File DestFile = new File(fileWithPath);
         //Copy file at destination
         FileUtils.copyFile(SrcFile, DestFile);
+    }
+
+    @And("WebBrowser is closed")
+    public void webbrowserIsClosed() {
+        driver.quit();
     }
 }
 
