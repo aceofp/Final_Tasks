@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
+import java.util.Date;
 
 public class Task_2 {
 
@@ -120,7 +121,9 @@ public class Task_2 {
 
     @Then("User take a screenshot with amount and order confirmation")
     public void userTakeAScreenshotWithAmountAndOrderConfirmation() throws Exception {
-        takeScreenshot(driver, "src/test/resources/screenshots/testResult.png");
+        long currentDateInMillis = new Date().getTime();
+        String filePath = String.format("src/test/resources/screenshots/testResult-%d.png", currentDateInMillis);
+        takeScreenshot(driver, filePath);
     }
 
     public static void takeScreenshot(WebDriver webdriver, String fileWithPath) throws Exception {
