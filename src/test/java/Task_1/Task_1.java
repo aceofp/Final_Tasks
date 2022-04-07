@@ -1,5 +1,7 @@
 package Task_1;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,12 +16,15 @@ public class Task_1 {
     FormPage formPage;
     WebDriver driver;
 
-    @Given("open browser on (.*)$")
-    public void openSite(String site) {
+    @Before
+    public void setup() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        System.out.println(site);
+    }
+
+    @Given("open browser on (.*)$")
+    public void openSite(String site) {
         homePage = new HomePage(driver);
         homePage.openHomePage(site);
     }
@@ -62,7 +67,7 @@ public class Task_1 {
         addressesPage.verifyAlias(expectedAliasText, actualAliasText);
     }
 
-    @And("Browser is closed")
+    @After
     public void browserIsClosed() {
         driver.quit();
     }
