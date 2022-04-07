@@ -126,7 +126,7 @@ public class Task_2 {
         takeScreenshot(driver, filePath);
     }
 
-    public static void takeScreenshot(WebDriver webdriver, String fileWithPath) throws Exception {
+    private static void takeScreenshot(WebDriver webdriver, String fileWithPath) throws Exception {
         //Convert web driver object to TakeScreenshot
         TakesScreenshot scrShot = ((TakesScreenshot) webdriver);
         //Call getScreenshotAs method to create image file
